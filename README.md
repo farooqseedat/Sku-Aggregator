@@ -21,4 +21,5 @@ Just clone the repository and run docker-compose up. And you are good to go.
 
 # App Links:
 Link to frontend app: https://young-spire-23991.herokuapp.com/
+
 Link to django admin: https://sku-aggregator.herokuapp.com/admin
