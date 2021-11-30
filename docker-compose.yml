@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: db
+    build: ./db
+    networks:
+      - main
+    hostname: db
+
+  rabbitmq:
+    container_name: rabbitmq
+    hostname: rabbitmq
+    image: rabbitmq:latest
+    networks:
+      - main
+    ports:
+      - "5672:5672"
+    restart: on-failure
+    hostname: rabbitmq
+
+  api:
+    container_name: api
+    build: ./backend
+    command:  bash -c  
+      "python manage.py migrate &&
+         python manage.py runserver 0.0.0.0:8000"
+    ports: 
+        - "8000:8000"
+    networks:
+      main:
+        aliases:
+          - api-sku-aggregator.com
+    depends_on: 
+      - db
+      - rabbitmq
+    hostname: api
+    restart: on-failure
+  
+  celery_worker:
+    command: celery -A drfAssignment worker -l info
+    container_name: celery_worker
+    depends_on:
+      - api
+      - db
+      - rabbitmq
+    restart : on-failure
+    hostname: celery_worker
+    build: ./backend
+    networks:
+      main:
+        aliases:
+          - celery_worker
+    restart: on-failure
+
+  celery_beat:
+    command: celery -A drfAssignment beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    container_name: celery_beat
+    depends_on:
+      - api 
+      - db
+      - rabbitmq
+    hostname: celery_beat
+    build: ./backend
+    networks:
+      - main
+    restart: on-failure
+
+  frontend:
+    container_name: frontend
+    stdin_open: true
+    build: ./frontend
+    ports: 
+        - "3000:3000"
+    
+networks:
+  main:

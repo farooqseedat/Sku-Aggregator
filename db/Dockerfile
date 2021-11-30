@@ -1,0 +1,7 @@
+FROM postgres:10
+WORKDIR /db
+
+ENV POSTGRES_USER=app_user
+ENV POSTGRES_PASSWORD=123456fs
+ENV POSTGRES_DB=products_db
+VOLUME [ "/data" ]

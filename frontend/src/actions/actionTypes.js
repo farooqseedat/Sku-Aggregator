@@ -1,0 +1,10 @@
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+export const FETCH_PRODUCT = 'FETCH_PRODUCT';
+export const FETCH_SKUS = 'FETCH_SKUS';
+export const SELECT_SIZE = 'SELECT_SIZE';
+export const SELECT_IMAGE = 'SELECT_IMAGE';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
