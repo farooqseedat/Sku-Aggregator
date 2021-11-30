@@ -1,7 +1,7 @@
 # Sku-Aggregator
 Aggregator app that scrapes products from different sites regularly, store these products in database and show them to users with different filters.
 
-# Technology Used:
+# Technologies Used:
 <li>Python3</li>
 <li>Django Rest Framework</li>
 <li>Celery</li>
